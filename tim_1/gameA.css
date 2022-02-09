@@ -47,3 +47,12 @@ body {
 }
 
 #start a:hover,#play a:hover, #difficulty a:hover { background-color: #ffffff; color: #1bafdb; }
+
+.header-img {
+    margin-top: 8%;
+    margin-left: 40%;
+    width: 100%;
+    height: 200px;
+    background-image: url("/tim_1/img/header.png");
+    background-repeat: no-repeat;
+  }
