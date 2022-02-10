@@ -14,8 +14,6 @@ canvas.setAttribute("height", SCREEN_HEIGHT);
 document.body.appendChild(canvas);
 const ctx = canvas.getContext("2d");
 
-
-
 //podesavanje asteroida
 var asteroids = [];
 createAsteroidBelt();
@@ -34,7 +32,6 @@ function createAsteroidBelt() {
     }
 }
 
-
 //objekat 
 function newAsteroid(x, y) {
     var asteroid = {
@@ -48,11 +45,9 @@ function newAsteroid(x, y) {
         yv: Math.random() * ASTEROID_SPEED / FPS * (Math.random() < 0.5 ? 1 : -1)
     };
 
-  
     for (var i = 0; i < asteroid.vert; i++) {
         asteroid.offs.push(Math.random() * ASTEROID_EDGE * 2 + 1 - ASTEROID_EDGE);
     }
-
     return asteroid;
 }
 
@@ -61,7 +56,6 @@ function update() {
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
    
-
     // crtanje asteroida
     ctx.strokeStyle = "slategrey";
     ctx.lineWidth = 1.5;
@@ -109,27 +103,11 @@ function update() {
             asteroids[i].y = 0 - asteroids[i].r
         }
     }
-
 }
 
-
-
-
-
-
-
-
-
-
-
 function startGame() {
-    
     let gameCanvas = document.getElementById("canvas");
     let menu =document.getElementById("menu");
-    
-
     menu.style.display= "none";
-    gameCanvas.style.display = "block";
-
-    
+    gameCanvas.style.display = "block";    
 }
