@@ -54,6 +54,6 @@ body {
     margin-left: 40%;
     width: 100%;
     height: 200px;
-    background-image: url("/tim_1/img/header.png");
+    background-image: url("img/header.png");
     background-repeat: no-repeat;
   }
