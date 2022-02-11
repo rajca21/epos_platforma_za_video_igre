@@ -9,16 +9,23 @@ body {
 }
 .title p{
     font-family: cv;
+    color: #ffffff;
+    font-size: 4em;
+    padding: 10px;
+    position: fixed;
+    top:8%;
+    left: 46%;
+    
+    margin-left: -100px;
 }
 
-#start,#play,#difficulty{
-   /* font-family:Arial, Helvetica, sans-serif;*/
+.buttons{
     font-family: cv;
     color: #ffffff;
     padding: 20px;
     position: fixed;
-    top:50%;
-    left:50%;
+    top:57%;
+    left:49%;
     
     margin-left: -100px;
     height:200px;
@@ -26,16 +33,16 @@ body {
     text-align: center;
 }
 .btn1{
-    margin-top: -200px !important;
+    margin-top: -190px !important;
 }
 .btn2{
-    margin-top: -100px !important;
+    margin-top: 22px !important;
 }
 .btn3{
-    margin-top: 0px !important;
+    margin-top: 22px !important;
 }
 .btn4{
-    margin-top: 100px !important;
+    margin-top: 22px !important;
 }
 
 
@@ -54,15 +61,3 @@ body {
 }
 
 #start a:hover,#play a:hover, #difficulty a:hover { background-color: #ffffff; color: #1bafdb; }
-
-p {
-    color: #ffffff;
-    font-size: 4em;
-    padding: 10px;
-    position: fixed;
-    top:0%;
-    left: 47%;
-    
-    margin-left: -100px;
-    
-}

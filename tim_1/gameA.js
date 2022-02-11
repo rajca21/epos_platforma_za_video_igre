@@ -8,6 +8,7 @@ const FRICTION = 0.7; // trenje (0 = bez trenja, 1 = mnogo trenja)
 const SHIP_SIZE = 30; // visina broda u pixelima
 const SHIP_THRUST = 5; // ubrzanje broda u pixelima po sekundi
 const TURN_SPEED = 360; // brzina obrtanja broda u stepenu po sekundi
+var help = 0;
 
 const SCREEN_WIDTH = window.innerWidth;
 const SCREEN_HEIGHT = window.innerHeight;
@@ -143,7 +144,7 @@ function update() {
             ship.thrust.x -= FRICTION * ship.thrust.x / FPS;
             ship.thrust.y -= FRICTION * ship.thrust.y / FPS;
         }
-
+        if (help==1){
         // crtanje broda
         ctx.strokeStyle = "white";
         ctx.lineWidth = SHIP_SIZE / 20;
@@ -162,6 +163,10 @@ function update() {
         );
         ctx.closePath();
         ctx.stroke();
+        
+        // tackica na sredini broda
+        ctx.fillStyle = "red";
+        ctx.fillRect(ship.x - 1, ship.y - 1, 2, 2);}
 
         // okretanje broda
         ship.a += ship.rot;
@@ -182,9 +187,7 @@ function update() {
             ship.y = 0 - ship.r;
         }
 
-        // tackica na sredini broda
-        ctx.fillStyle = "red";
-        ctx.fillRect(ship.x - 1, ship.y - 1, 2, 2);
+        
     // ----------------ASTEROIDI-------------------
     // crtanje asteroida
     ctx.strokeStyle = "slategrey";
@@ -244,5 +247,5 @@ function startGame() {
     let gameCanvas = document.getElementById("canvas");
     let menu =document.getElementById("menu");
     menu.style.display= "none";
-    gameCanvas.style.display = "block";    
+    help = 1;    
 }
