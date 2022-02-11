@@ -55,18 +55,8 @@ body {
 
 #start a:hover,#play a:hover, #difficulty a:hover { background-color: #ffffff; color: #1bafdb; }
 
-.header-img {
-    
-    margin-top: 8%;
-    margin-left: 40%;
-    width: 100%;
-    height: 200px;
-    background-image: url("img/header.png");
-    background-repeat: no-repeat;
-  }
 p {
     color: #ffffff;
-    font-family: "Charge Vector";
     font-size: 4em;
     padding: 10px;
     position: fixed;
