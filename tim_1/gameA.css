@@ -1,12 +1,19 @@
-
+@font-face {
+    src: url("fonts/Charge-Vector.otf");
+    font-family: cv;
+}
 
 body {
     color: #ffffff;
     background-color:#000000;
 }
+.title p{
+    font-family: cv;
+}
 
 #start,#play,#difficulty{
-    font-family:Arial, Helvetica, sans-serif;
+   /* font-family:Arial, Helvetica, sans-serif;*/
+    font-family: cv;
     color: #ffffff;
     padding: 20px;
     position: fixed;
