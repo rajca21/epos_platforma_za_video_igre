@@ -1,6 +1,6 @@
 const FPS = 30; // frejmovi po sekundi
 const ASTEROID_EDGE = 0.4; // oblik asteroida (0 = none, 1 = lots)
-const ASTEROID_NUM = 15; // pocetni broj asteroida
+const ASTEROID_NUM = 3; // pocetni broj asteroida
 const ASTEROID_SIZE = 100; // pocetna velicina asteroida 
 const ASTEROID_SPEED = 100; // maximalna brzina asteroida u pixelima u sekundi
 const ASTEROID_VERT = 10; // srednja vrednost koliko ce asteroid da ima stranica
@@ -8,9 +8,12 @@ const FRICTION = 0.7; // trenje (0 = bez trenja, 1 = mnogo trenja)
 const SHIP_SIZE = 30; // visina broda u pixelima
 const SHIP_THRUST = 5; // ubrzanje broda u pixelima po sekundi
 const TURN_SPEED = 360; // brzina obrtanja broda u stepenu po sekundi
+//kolizija 
+const SHIP_DESTROYED_TIME = 0.3; // duzina unistenja broda 
+const SHOW_FRAME = false; // obod broda i asteroida, kada se dodirnu da dodje do eksplozije, ako se stavi true vide se granice
 var help = 0;
 //laser
-const LASER_DIST = 0.4; // max distanca lasea
+const LASER_DIST = 0.4; // max distanca lasera
 const LASER_MAX = 10; // max broj lasera na ekranu
 const LASER_SPD = 500; // brzinu lasera u pixelima po sekundi
 
@@ -32,6 +35,7 @@ var ship = {
     r: SHIP_SIZE / 2,
     a: 90 / 180 * Math.PI, // pretvaranje u radijane
     rot: 0,
+    destroyTime: 0,
     thrusting: false, // nema ubrzanje na pocetku
     canShoot: true,
     explodeTime: 0,
@@ -48,6 +52,10 @@ createAsteroidBelt();
 
 // podesavanja loopa 
 setInterval(update, 1000 / FPS);
+//unistavanje broda
+function destroyShip(){
+    ship.destroyTime = Math.ceil(SHIP_DESTROYED_TIME * FPS);
+}
 
 // podesavanje eventhandlera za drzanje dugmeta
 document.addEventListener("keydown", keyDown);
@@ -141,6 +149,7 @@ function shootLaser() {
 }
 
 function update() {
+    var destroying = ship.destroyTime > 0;
     // pozadina / polje igrice / popunjavanje kanvasa
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -151,6 +160,7 @@ function update() {
             ship.thrust.y -= SHIP_THRUST * Math.sin(ship.a) / FPS;
 
             // crtanje izduvnih gasova
+            if(!destroying){
             ctx.fillStyle = "red";
             ctx.strokeStyle = "yellow";
             ctx.lineWidth = SHIP_SIZE / 10;
@@ -170,12 +180,14 @@ function update() {
             ctx.closePath();
             // ctx.fill();
             ctx.stroke();
+            }
         } else { // dolazi do else kad pustimo strelicu na gore
             // dodajemo trenje (brod usporava polako kad prestane ubrzanje)
             ship.thrust.x -= FRICTION * ship.thrust.x / FPS;
             ship.thrust.y -= FRICTION * ship.thrust.y / FPS;
         }
         if (help==1){
+            if(!destroying){
         // crtanje broda
         ctx.strokeStyle = "white";
         ctx.lineWidth = SHIP_SIZE / 20;
@@ -194,11 +206,41 @@ function update() {
         );
         ctx.closePath();
         ctx.stroke();
-        
+        }else{
+            //crta unistavanje broda, privremena zamena za https://www.geeksforgeeks.org/explosion-animation-in-canvas/ ili neku slicnu animaciju
+            ctx.fillStyle = "black";
+            ctx.beginPath();
+            ctx.arc(ship.x, ship.y, ship.r*1.5, 0, Math.PI * 2, false);
+            ctx.fill();
+            ctx.fillStyle = "darkred";
+            ctx.beginPath();
+            ctx.arc(ship.x, ship.y, ship.r*1.2, 0, Math.PI * 2, false);
+            ctx.fill();
+            ctx.fillStyle = "red";
+            ctx.beginPath();
+            ctx.arc(ship.x, ship.y, ship.r*0.9, 0, Math.PI * 2, false);
+            ctx.fill();
+            ctx.fillStyle = "orange";
+            ctx.beginPath();
+            ctx.arc(ship.x, ship.y, ship.r*0.3, 0, Math.PI * 2, false);
+            ctx.fill();
+         }
+         //granice broda za koliziju
+        if (SHOW_FRAME) {
+            ctx.strokeStyle = "green";
+            ctx.beginPath();
+            ctx.arc(ship.x, ship.y, ship.r, 0, Math.PI * 2, false);
+            ctx.stroke();
+        }      
+        for(var i=0; i<asteroids.length;i++){
+            if(distBetweenPoints(ship.x,ship.y,asteroids[i].x,asteroids[i].y)<ship.r + asteroids[i].r){
+                destroyShip();
+            }
+        }
         // tackica na sredini broda
         ctx.fillStyle = "red";
         ctx.fillRect(ship.x - 1, ship.y - 1, 2, 2);}
-
+        if(!destroying){
         // crtanje lasera
         for (var i = 0; i < ship.lasers.length; i++) {
             ctx.fillStyle = "red";
@@ -206,13 +248,15 @@ function update() {
             ctx.arc(ship.lasers[i].x, ship.lasers[i].y, SHIP_SIZE / 15, 0, Math.PI * 2, false);
             ctx.fill();
         }
+        
+            // okretanje broda
+            ship.a += ship.rot;
 
-        // okretanje broda
-        ship.a += ship.rot;
-
-        // pomeranje broda
-        ship.x += ship.thrust.x;
-        ship.y += ship.thrust.y;
+            // pomeranje broda
+            ship.x += ship.thrust.x;
+            ship.y += ship.thrust.y;
+        }
+        
 
         // kada brod ode na ivicu ekrana
         if (ship.x < 0 - ship.r) {
@@ -255,11 +299,10 @@ function update() {
         
     // ----------------ASTEROIDI-------------------
     // crtanje asteroida
-    ctx.strokeStyle = "slategrey";
-    ctx.lineWidth = 1.5;
     var a, r, x, y, offs, vert;
     for (var i = 0; i < asteroids.length; i++) {
-
+        ctx.strokeStyle = "slategrey";
+        ctx.lineWidth = 1.5;
         // uzimanje propertija asteroida
         a = asteroids[i].a;
         r = asteroids[i].r;
@@ -284,6 +327,13 @@ function update() {
         }
         ctx.closePath();
         ctx.stroke();
+        //granice asteroida za koliziju
+        if (SHOW_FRAME) {
+            ctx.strokeStyle = "blue";
+            ctx.beginPath();
+            ctx.arc(x, y, r, 0, Math.PI * 2, false);
+            ctx.stroke();
+        } 
 
         // pomeranje asteroida
         asteroids[i].x += asteroids[i].xv;
@@ -302,8 +352,6 @@ function update() {
         }
     }
 }
-
-
 
 
 function startGame() {
