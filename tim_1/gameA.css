@@ -3,6 +3,10 @@
     font-family: cv;
 }
 
+html{
+    overflow: hidden;
+}
+
 body {
     color: #ffffff;
     background-color:#000000;
