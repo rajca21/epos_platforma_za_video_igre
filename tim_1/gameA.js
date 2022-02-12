@@ -9,6 +9,12 @@ const SHIP_SIZE = 30; // visina broda u pixelima
 const SHIP_THRUST = 5; // ubrzanje broda u pixelima po sekundi
 const TURN_SPEED = 360; // brzina obrtanja broda u stepenu po sekundi
 var help = 0;
+//laser
+const LASER_DIST = 0.4; // max distanca lasea
+const LASER_MAX = 10; // max broj lasera na ekranu
+const LASER_SPD = 500; // brzinu lasera u pixelima po sekundi
+
+ 
 
 const SCREEN_WIDTH = window.innerWidth;
 const SCREEN_HEIGHT = window.innerHeight;
@@ -27,6 +33,9 @@ var ship = {
     a: 90 / 180 * Math.PI, // pretvaranje u radijane
     rot: 0,
     thrusting: false, // nema ubrzanje na pocetku
+    canShoot: true,
+    explodeTime: 0,
+    lasers:[],
     thrust: {
         x: 0,
         y: 0
@@ -47,6 +56,9 @@ document.addEventListener("keyup", keyUp);
 //pritiskanje dugmeta / drzanje
  function keyDown(/** @type {KeyboardEvent} */ ev) {
      switch(ev.keyCode) {
+         case 32: // space = (pewpew)
+             shootLaser();
+             break;
          case 37: // leva strelica (okretanje broda u levo)
              ship.rot = TURN_SPEED / 180 * Math.PI / FPS;
              break;
@@ -61,6 +73,9 @@ document.addEventListener("keyup", keyUp);
 //podizanje dugmeta / odpustanje
  function keyUp(/** @type {KeyboardEvent} */ ev) {
      switch(ev.keyCode) {
+         case 32: // space ( moze da puca ponovo )
+             ship.canShoot = true;
+             break;
          case 37: // leva strelica (prekidanje okretanju broda u levo)
              ship.rot = 0;
              break;
@@ -107,6 +122,22 @@ function newAsteroid(x, y) {
         asteroid.offs.push(Math.random() * ASTEROID_EDGE * 2 + 1 - ASTEROID_EDGE);
     }
     return asteroid;
+}
+
+function shootLaser() {
+    
+    if (ship.canShoot && ship.lasers.length < LASER_MAX) {
+        ship.lasers.push({ //iz vrha broda
+            x: ship.x + 4 / 3 * ship.r * Math.cos(ship.a),
+            y: ship.y - 4 / 3 * ship.r * Math.sin(ship.a),
+            xv: LASER_SPD * Math.cos(ship.a) / FPS,
+            yv: -LASER_SPD * Math.sin(ship.a) / FPS,
+            dist: 0,
+            explodeTime: 0
+        });
+    }
+
+    ship.canShoot = false;
 }
 
 function update() {
@@ -168,6 +199,14 @@ function update() {
         ctx.fillStyle = "red";
         ctx.fillRect(ship.x - 1, ship.y - 1, 2, 2);}
 
+        // crtanje lasera
+        for (var i = 0; i < ship.lasers.length; i++) {
+            ctx.fillStyle = "red";
+            ctx.beginPath();
+            ctx.arc(ship.lasers[i].x, ship.lasers[i].y, SHIP_SIZE / 15, 0, Math.PI * 2, false);
+            ctx.fill();
+        }
+
         // okretanje broda
         ship.a += ship.rot;
 
@@ -187,6 +226,32 @@ function update() {
             ship.y = 0 - ship.r;
         }
 
+        //pomeranje lasera
+        for (var i = ship.lasers.length - 1; i >= 0; i--){
+            //provera distance lasera
+            if (ship.lasers[i].dist > LASER_DIST * canvas.width){
+                ship.lasers.splice(i, 1);
+                continue;
+            }
+
+            ship.lasers[i].x += ship.lasers[i].xv;
+            ship.lasers[i].y += ship.lasers[i].yv;
+
+            //distanca koja je laser prosao
+            ship.lasers[i].dist += Math.sqrt(Math.pow(ship.lasers[i].xv, 2) + Math.pow(ship.lasers[i].yv, 2));
+            
+            //kad ode van ekrana
+            if (ship.lasers[i].x < 0){
+                ship.lasers[i].x = canvas.width;
+            }else if (ship.lasers[i].x > canvas.width){
+                ship.lasers.x = 0
+            }
+            if (ship.lasers[i].y < 0){
+                ship.lasers[i].y = canvas.height;
+            }else if (ship.lasers[i].y > canvas.height){
+                ship.lasers.y = 0
+            }
+        }
         
     // ----------------ASTEROIDI-------------------
     // crtanje asteroida
@@ -235,8 +300,6 @@ function update() {
         } else if (asteroids[i].y > canvas.height + asteroids[i].r) {
             asteroids[i].y = 0 - asteroids[i].r
         }
-        
-
     }
 }
 
