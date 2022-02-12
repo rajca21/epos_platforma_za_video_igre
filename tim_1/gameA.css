@@ -1,17 +1,35 @@
+@font-face {
+    src: url("fonts/Charge-Vector.otf");
+    font-family: cv;
+}
 
+html{
+    overflow: hidden;
+}
 
 body {
     color: #ffffff;
     background-color:#000000;
 }
+.title p{
+    font-family: cv;
+    color: #ffffff;
+    font-size: 4em;
+    padding: 10px;
+    position: fixed;
+    top:8%;
+    left: 46%;
+    
+    margin-left: -100px;
+}
 
-#start,#play,#difficulty{
-    font-family:Arial, Helvetica, sans-serif;
+.buttons{
+    font-family: cv;
     color: #ffffff;
     padding: 20px;
     position: fixed;
-    top:50%;
-    left:50%;
+    top:57%;
+    left:49%;
     
     margin-left: -100px;
     height:200px;
@@ -19,16 +37,16 @@ body {
     text-align: center;
 }
 .btn1{
-    margin-top: -200px !important;
+    margin-top: -190px !important;
 }
 .btn2{
-    margin-top: -100px !important;
+    margin-top: 22px !important;
 }
 .btn3{
-    margin-top: 0px !important;
+    margin-top: 22px !important;
 }
 .btn4{
-    margin-top: 100px !important;
+    margin-top: 22px !important;
 }
 
 
@@ -47,12 +65,3 @@ body {
 }
 
 #start a:hover,#play a:hover, #difficulty a:hover { background-color: #ffffff; color: #1bafdb; }
-
-.header-img {
-    margin-top: 8%;
-    margin-left: 40%;
-    width: 100%;
-    height: 200px;
-    background-image: url("/tim_1/img/header.png");
-    background-repeat: no-repeat;
-  }
