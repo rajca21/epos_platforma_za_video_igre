@@ -63,6 +63,7 @@ document.addEventListener("keyup", keyUp);
 
 //pritiskanje dugmeta / drzanje
  function keyDown(/** @type {KeyboardEvent} */ ev) {
+     if(help == 1){
      switch(ev.keyCode) {
          case 32: // space = (pewpew)
              shootLaser();
@@ -77,9 +78,11 @@ document.addEventListener("keyup", keyUp);
              ship.rot = -TURN_SPEED / 180 * Math.PI / FPS;
              break;
      }
+    }
  }
 //podizanje dugmeta / odpustanje
  function keyUp(/** @type {KeyboardEvent} */ ev) {
+     if(help == 1){
      switch(ev.keyCode) {
          case 32: // space ( moze da puca ponovo )
              ship.canShoot = true;
@@ -94,6 +97,7 @@ document.addEventListener("keyup", keyUp);
              ship.rot = 0;
              break;
      }
+    }
  }
 
  function distBetweenPoints(x1, y1, x2, y2) {
