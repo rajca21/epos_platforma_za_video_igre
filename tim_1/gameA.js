@@ -25,6 +25,7 @@ var help = 0;
 const LASER_DIST = 0.4; // max distanca lasera
 const LASER_MAX = 10; // max broj lasera na ekranu
 const LASER_SPD = 500; // brzinu lasera u pixelima po sekundi
+const LASER_EXPLODE_DUR = 0.1; // eksplozija lasera u sekundama
 var level, asteroids, ship;
 newGame();
  
@@ -131,18 +132,36 @@ function createAsteroidBelt() {
         do{
             x = Math.floor(Math.random() * canvas.width);
             y = Math.floor(Math.random() * canvas.height);
-            asteroids.push(newAsteroid(x,y));
+            asteroids.push(newAsteroid(x,y, Math.ceil(ASTEROID_SIZE / 2)));
         } while (distBetweenPoints(ship.x, ship.y, x, y) < ASTEROID_SIZE * 2 + ship.r);
-        asteroids.push(newAsteroid(x, y));
+        asteroids.push(newAsteroid(x, y, Math.ceil(ASTEROID_SIZE / 2)));
     }
 }
 
+function destroyAsteroid(index) {
+    var x = asteroids[index].x;
+    var y = asteroids[index].y;
+    var r = asteroids[index].r;
+
+    // deli se asteroid na 2 ako je moguce
+    if (r == Math.ceil(ASTEROID_SIZE / 2)) { // veliki asteroid
+        asteroids.push(newAsteroid(x, y, Math.ceil(ASTEROID_SIZE / 4)));
+        asteroids.push(newAsteroid(x, y, Math.ceil(ASTEROID_SIZE / 4)));
+    } else if (r == Math.ceil(ASTEROID_SIZE / 4)) { // srednji asteroid
+        asteroids.push(newAsteroid(x, y, Math.ceil(ASTEROID_SIZE / 8)));
+        asteroids.push(newAsteroid(x, y, Math.ceil(ASTEROID_SIZE / 8)));
+    }
+
+    // unistavanje asteroida
+    asteroids.splice(index, 1);
+}
+
 //objekat asteroida
-function newAsteroid(x, y) {
+function newAsteroid(x, y, r) {
     var asteroid = {
         a: Math.random() * Math.PI * 2, 
         offs: [],
-        r: ASTEROID_SIZE / 2,
+        r: r,
         vert: Math.floor(Math.random() * (ASTEROID_VERT + 1) + ASTEROID_VERT / 2),
         x: x,
         y: y,
@@ -260,18 +279,62 @@ function update() {
         for(var i=0; i<asteroids.length;i++){
             if(distBetweenPoints(ship.x,ship.y,asteroids[i].x,asteroids[i].y)<ship.r + asteroids[i].r){
                 destroyShip();
+                destroyAsteroid();
+                break;
             }
         }
         // tackica na sredini broda
         ctx.fillStyle = "red";
         ctx.fillRect(ship.x - 1, ship.y - 1, 2, 2);}
+        // detektovanje hita lasera na asteroid
+        var ax, ay, ar, lx, ly;
+        for (var i = asteroids.length - 1; i >= 0; i--) {
+
+            // vrednosti asteroida
+            ax = asteroids[i].x;
+            ay = asteroids[i].y;
+            ar = asteroids[i].r;
+
+            // loop za lasere
+            for (var j = ship.lasers.length - 1; j >= 0; j--) {
+
+                // vrednosti lasera
+                lx = ship.lasers[j].x;
+                ly = ship.lasers[j].y;
+
+                // detekcija
+                if (ship.lasers[j].explodeTime == 0 && distBetweenPoints(ax, ay, lx, ly) < ar) {
+
+                    // unistavanje asteroida
+                    destroyAsteroid(i);
+                    ship.lasers[j].explodeTime = Math.ceil(LASER_EXPLODE_DUR * FPS);
+                    break;
+                }
+            }
+        }
         if(!destroying){
         // crtanje lasera
         for (var i = 0; i < ship.lasers.length; i++) {
-            ctx.fillStyle = "red";
-            ctx.beginPath();
-            ctx.arc(ship.lasers[i].x, ship.lasers[i].y, SHIP_SIZE / 15, 0, Math.PI * 2, false);
-            ctx.fill();
+            if(ship.lasers[i].explodeTime == 0){
+                ctx.fillStyle = "red";
+                ctx.beginPath();
+                ctx.arc(ship.lasers[i].x, ship.lasers[i].y, SHIP_SIZE / 15, 0, Math.PI * 2, false);
+                ctx.fill();
+            } else{// crtamo eksploziju
+                ctx.fillStyle = "orangered";
+                ctx.beginPath();
+                ctx.arc(ship.lasers[i].x, ship.lasers[i].y, ship.r * 0.75, 0, Math.PI * 2, false);
+                ctx.fill();
+                ctx.fillStyle = "salmon";
+                ctx.beginPath();
+                ctx.arc(ship.lasers[i].x, ship.lasers[i].y, ship.r * 0.5, 0, Math.PI * 2, false);
+                ctx.fill();
+                ctx.fillStyle = "pink";
+                ctx.beginPath();
+                ctx.arc(ship.lasers[i].x, ship.lasers[i].y, ship.r * 0.25, 0, Math.PI * 2, false);
+                ctx.fill();
+            }
+            
         }
         
             // okretanje broda
@@ -302,9 +365,19 @@ function update() {
                 ship.lasers.splice(i, 1);
                 continue;
             }
+            // eksplozija lasera kad pogodi asteroid
+            if (ship.lasers[i].explodeTime > 0) {
+                ship.lasers[i].explodeTime--;
 
-            ship.lasers[i].x += ship.lasers[i].xv;
-            ship.lasers[i].y += ship.lasers[i].yv;
+                // unistavanje / brisanje lasera
+                if (ship.lasers[i].explodeTime == 0) {
+                    ship.lasers.splice(i, 1);
+                    continue;
+                }}
+            else{
+                ship.lasers[i].x += ship.lasers[i].xv;
+                ship.lasers[i].y += ship.lasers[i].yv;
+            }
 
             //distanca koja je laser prosao
             ship.lasers[i].dist += Math.sqrt(Math.pow(ship.lasers[i].xv, 2) + Math.pow(ship.lasers[i].yv, 2));
