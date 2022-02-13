@@ -1,3 +1,12 @@
+const SCREEN_WIDTH = window.innerWidth;
+const SCREEN_HEIGHT = window.innerHeight;
+
+const canvas = document.createElement("canvas");
+canvas.setAttribute("width", SCREEN_WIDTH);
+canvas.setAttribute("height", SCREEN_HEIGHT);
+document.body.appendChild(canvas);
+const ctx = canvas.getContext("2d");
+
 const FPS = 30; // frejmovi po sekundi
 const ASTEROID_EDGE = 0.4; // oblik asteroida (0 = none, 1 = lots)
 const ASTEROID_NUM = 3; // pocetni broj asteroida
@@ -16,45 +25,50 @@ var help = 0;
 const LASER_DIST = 0.4; // max distanca lasera
 const LASER_MAX = 10; // max broj lasera na ekranu
 const LASER_SPD = 500; // brzinu lasera u pixelima po sekundi
-
+var level, asteroids, ship;
+newGame();
  
 
-const SCREEN_WIDTH = window.innerWidth;
-const SCREEN_HEIGHT = window.innerHeight;
+function newGame(){
+    // podesavanje broda kao objekta
+    ship = newShip();
+    
+    createAsteroidBelt();
+}
 
-const canvas = document.createElement("canvas");
-canvas.setAttribute("width", SCREEN_WIDTH);
-canvas.setAttribute("height", SCREEN_HEIGHT);
-document.body.appendChild(canvas);
-const ctx = canvas.getContext("2d");
-
-// podesavanje broda kao objekta
-var ship = {
-    x: canvas.width / 2,
-    y: canvas.height / 2,
-    r: SHIP_SIZE / 2,
-    a: 90 / 180 * Math.PI, // pretvaranje u radijane
-    rot: 0,
-    destroyTime: 0,
-    thrusting: false, // nema ubrzanje na pocetku
-    canShoot: true,
-    explodeTime: 0,
-    lasers:[],
-    thrust: {
-        x: 0,
-        y: 0
+function newShip(){
+    return{
+        x: canvas.width / 2,
+        y: canvas.height / 2,
+        r: SHIP_SIZE / 2,
+        a: 90 / 180 * Math.PI, // pretvaranje u radijane
+        rot: 0,
+        destroyTime: 0,
+        ripship: false,
+        thrusting: false, // nema ubrzanje na pocetku
+        canShoot: true,
+        explodeTime: 0,
+        lasers:[],
+        thrust: {
+            x: 0,
+            y: 0
+        }
     }
 }
 
 //podesavanje asteroida
-var asteroids = [];
-createAsteroidBelt();
+/*var asteroids = [];
+createAsteroidBelt();*/
 
 // podesavanja loopa 
 setInterval(update, 1000 / FPS);
 //unistavanje broda
 function destroyShip(){
     ship.destroyTime = Math.ceil(SHIP_DESTROYED_TIME * FPS);
+}
+function gameOver(){
+    ripship = true;
+    mainMenu()
 }
 
 // podesavanje eventhandlera za drzanje dugmeta
@@ -63,6 +77,9 @@ document.addEventListener("keyup", keyUp);
 
 //pritiskanje dugmeta / drzanje
  function keyDown(/** @type {KeyboardEvent} */ ev) {
+     if (ship.ripship){
+         return;
+     }
      if(help == 1){
      switch(ev.keyCode) {
          case 32: // space = (pewpew)
@@ -82,6 +99,9 @@ document.addEventListener("keyup", keyUp);
  }
 //podizanje dugmeta / odpustanje
  function keyUp(/** @type {KeyboardEvent} */ ev) {
+    if (ship.ripship){
+        return;
+    }
      if(help == 1){
      switch(ev.keyCode) {
          case 32: // space ( moze da puca ponovo )
@@ -159,7 +179,7 @@ function update() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     // ----------------BROD-------------------
         // ubrzavanje broda
-        if (ship.thrusting) {
+        if (ship.thrusting && !ship.ripship) {
             ship.thrust.x += SHIP_THRUST * Math.cos(ship.a) / FPS;
             ship.thrust.y -= SHIP_THRUST * Math.sin(ship.a) / FPS;
 
@@ -190,7 +210,7 @@ function update() {
             ship.thrust.x -= FRICTION * ship.thrust.x / FPS;
             ship.thrust.y -= FRICTION * ship.thrust.y / FPS;
         }
-        if (help==1){
+        if (help==1 && !ship.ripship){
             if(!destroying){
         // crtanje broda
         ctx.strokeStyle = "white";
@@ -228,6 +248,7 @@ function update() {
             ctx.beginPath();
             ctx.arc(ship.x, ship.y, ship.r*0.3, 0, Math.PI * 2, false);
             ctx.fill();
+            gameOver();
          }
          //granice broda za koliziju
         if (SHOW_FRAME) {
@@ -357,10 +378,16 @@ function update() {
     }
 }
 
-
+function mainMenu(){
+    let menu =document.getElementById("menu");
+    menu.style.display= "block";
+    help=0;
+}
 function startGame() {
     let gameCanvas = document.getElementById("canvas");
     let menu =document.getElementById("menu");
     menu.style.display= "none";
-    help = 1;    
+    help = 1;
+    ship.ripship=false;
+    newGame();    
 }
