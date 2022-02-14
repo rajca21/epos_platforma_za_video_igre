@@ -26,7 +26,7 @@ const LASER_DIST = 0.4; // max distanca lasera
 const LASER_MAX = 10; // max broj lasera na ekranu
 const LASER_SPD = 500; // brzinu lasera u pixelima po sekundi
 const LASER_EXPLODE_DUR = 0.1; // eksplozija lasera u sekundama
-var level, asteroids, ship;
+var level, asteroids, ship, score;
 newGame();
  
 
@@ -67,10 +67,7 @@ setInterval(update, 1000 / FPS);
 function destroyShip(){
     ship.destroyTime = Math.ceil(SHIP_DESTROYED_TIME * FPS);
 }
-function gameOver(){
-    ripship = true;
-    mainMenu()
-}
+
 
 // podesavanje eventhandlera za drzanje dugmeta
 document.addEventListener("keydown", keyDown);
@@ -267,6 +264,7 @@ function update() {
             ctx.beginPath();
             ctx.arc(ship.x, ship.y, ship.r*0.3, 0, Math.PI * 2, false);
             ctx.fill();
+           // setTimeout(gameOver,100);
             gameOver();
          }
          //granice broda za koliziju
@@ -450,14 +448,29 @@ function update() {
         }
     }
 }
-
+function gameOver(){
+    ripship = true;
+    endMenu();
+}
+function endMenu(){
+    score=10;
+    let gameOverMenu = document.getElementById("GameOver");
+    let htmlScore = document.getElementById("score");
+    htmlScore.innerHTML = score;
+    gameOverMenu.style.display = "block";
+    
+}
 function mainMenu(){
+    let testman = document.getElementById("GameOver");
     let menu =document.getElementById("menu");
-    menu.style.display= "block";
-    help=0;
+    
+    testman.style.display = "none";
+    menu.style.display = "block";
+    help = 0;
+
 }
 function startGame() {
-    let gameCanvas = document.getElementById("canvas");
+    document.getElementById("GameOver").style.display="none";
     let menu =document.getElementById("menu");
     menu.style.display= "none";
     help = 1;

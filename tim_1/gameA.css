@@ -49,8 +49,11 @@ body {
     margin-top: 22px !important;
 }
 
-
-#start a,#play a,#difficulty a {
+#start a,
+#play a,
+#difficulty a,
+#retry a, 
+#gtmainmenu a {
     border: 3px solid #ffffff;
     color: #ffffff;
     text-decoration: none;
@@ -63,5 +66,16 @@ body {
     font-size:2em;
     display: inline-block;
 }
+#GameOver .buttons {
+    top: 45%;
+}
+p#score {
+    top: 20%;
+    left: 54.5%;
+}
 
-#start a:hover,#play a:hover, #difficulty a:hover { background-color: #ffffff; color: #1bafdb; }
+#start a:hover,
+#play a:hover, 
+#difficulty a:hover,
+#retry a:hover,
+#gtmainmenu a:hover { background-color: #ffffff; color: #1bafdb; }
