@@ -136,6 +136,7 @@ function createAsteroidBelt() {
 }
 
 function destroyAsteroid(index) {
+    if (!ship.ripship){
     var x = asteroids[index].x;
     var y = asteroids[index].y;
     var r = asteroids[index].r;
@@ -151,6 +152,7 @@ function destroyAsteroid(index) {
 
     // unistavanje asteroida
     asteroids.splice(index, 1);
+    }
 }
 
 //objekat asteroida
@@ -449,7 +451,7 @@ function update() {
     }
 }
 function gameOver(){
-    ripship = true;
+    ship.ripship = true;
     endMenu();
 }
 function endMenu(){
