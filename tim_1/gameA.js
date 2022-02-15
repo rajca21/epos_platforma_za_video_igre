@@ -26,6 +26,12 @@ const LASER_DIST = 0.4; // max distanca lasera
 const LASER_MAX = 10; // max broj lasera na ekranu
 const LASER_SPD = 500; // brzinu lasera u pixelima po sekundi
 const LASER_EXPLODE_DUR = 0.1; // eksplozija lasera u sekundama
+//skor
+ASTEROID_LARGE_SCORE = 10//broj poena za veliki asteroid
+ASTEROID_MEDIUM_SCORE = 25//broj poena za srednji asteroid
+ASTEROID_SMALL_SCORE = 50//broj poena za mali asteroid
+
+
 var level, asteroids, ship, score;
 newGame();
  
@@ -33,7 +39,7 @@ newGame();
 function newGame(){
     // podesavanje broda kao objekta
     ship = newShip();
-    
+    score = 0;
     createAsteroidBelt();
 }
 
@@ -145,9 +151,13 @@ function destroyAsteroid(index) {
     if (r == Math.ceil(ASTEROID_SIZE / 2)) { // veliki asteroid
         asteroids.push(newAsteroid(x, y, Math.ceil(ASTEROID_SIZE / 4)));
         asteroids.push(newAsteroid(x, y, Math.ceil(ASTEROID_SIZE / 4)));
+        score += ASTEROID_LARGE_SCORE;
     } else if (r == Math.ceil(ASTEROID_SIZE / 4)) { // srednji asteroid
         asteroids.push(newAsteroid(x, y, Math.ceil(ASTEROID_SIZE / 8)));
         asteroids.push(newAsteroid(x, y, Math.ceil(ASTEROID_SIZE / 8)));
+        score += ASTEROID_MEDIUM_SCORE;
+    } else{
+        score += ASTEROID_SMALL_SCORE;
     }
 
     // unistavanje asteroida
@@ -449,13 +459,19 @@ function update() {
             asteroids[i].y = 0 - asteroids[i].r
         }
     }
+
+    //crtanje skora
+    ctx.textAlign = "left";
+    ctx.textBaseline = "middle";
+    ctx.fillStyle = "white";
+    ctx.font = ASTEROID_SMALL_SCORE + "px dejavu sans mono";//koristio sam vec stavljenu velicinu za mali asteroid kao velicina fonta
+    ctx.fillText(score,10,30);
 }
 function gameOver(){
     ship.ripship = true;
     endMenu();
 }
 function endMenu(){
-    score=10;
     let gameOverMenu = document.getElementById("GameOver");
     let htmlScore = document.getElementById("score");
     htmlScore.innerHTML = score;
