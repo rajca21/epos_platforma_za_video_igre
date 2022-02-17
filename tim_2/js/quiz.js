@@ -1,10 +1,10 @@
 const quizData = [
     {
-        question: "Which language runs in a web browser?",
-        a: "Java",
-        b: "C",
-        c: "Python",
-        d: "javascript",
+        question: "Koji je najviši vrh na svetu?",
+        a: "Kilimandžaro",
+        b: "K2",
+        c: "Monblan",
+        d: "Mont Everest",
         correct: "d",
     },
     {
