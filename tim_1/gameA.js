@@ -487,6 +487,15 @@ function update() {
     ctx.font = (ASTEROID_SMALL_SCORE * 0.75) + "px dejavu sans mono";//koristio sam vec stavljenu velicinu za mali asteroid kao velicina fonta
     ctx.fillText("HIGH: " + highscore, (canvas.width / 2) - 2 * SHIP_SIZE, SHIP_SIZE);
 }
+
+function customMenu(){
+    let customizeMenu = document.getElementById("CustomizeMenu");
+    let menu =document.getElementById("menu");
+    menu.style.display = "none";
+    customizeMenu.style.display = "block";
+}
+
+
 function gameOver(){
     ship.ripship = true;
     endMenu();
@@ -498,10 +507,12 @@ function endMenu(){
     gameOverMenu.style.display = "block";
     
 }
+
 function mainMenu(){
     let testman = document.getElementById("GameOver");
     let menu =document.getElementById("menu");
-    
+    let custommen = document.getElementById("CustomizeMenu");
+    custommen.style.display = "none";
     testman.style.display = "none";
     menu.style.display = "block";
     help = 0;
