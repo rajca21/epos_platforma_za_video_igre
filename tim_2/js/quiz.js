@@ -1,35 +1,51 @@
 const quizData = [
     {
+<<<<<<< HEAD
         question: "Which language runs in a web browser?",
         a: "1996",
         b: "C",
         c: "Python",
         d: "javascript",
+=======
+        question: "Koji je najviši vrh na svetu?",
+        a: "Kilimandžaro",
+        b: "K2",
+        c: "Monblan",
+        d: "Mont Everest",
+>>>>>>> 2ad924313a4ddd688ed752ccd06727e2898a3c36
         correct: "d",
     },
     {
-        question: "What does CSS stand for?",
-        a: "Central Style Sheets",
-        b: "Cascading Style Sheets",
-        c: "Cascading Simple Sheets",
-        d: "Cars SUVs Sailboats",
-        correct: "b",
-    },
-    {
-        question: "What does HTML stand for?",
-        a: "Hypertext Markup Language",
-        b: "Hypertext Markdown Language",
-        c: "Hyperloop Machine Language",
-        d: "Helicopters Terminals Motorboats Lamborginis",
+        question: "Ko je otac geografije?",
+        a: "Eratosten",
+        b: "Arhimed",
+        c: "Epikur",
+        d: "Euripid",
         correct: "a",
     },
     {
-        question: "What year was JavaScript launched?",
-        a: "1996",
-        b: "1995",
-        c: "1994",
-        d: "none of the above",
+        question: "Koji je glavni grad Letonije?",
+        a: "Viljnus",
+        b: "Talin",
+        c: "Riga",
+        d: "Kišinjev",
+        correct: "c",
+    },
+    {
+        question: "Ko je naš najpoznatiji geograf?",
+        a: "Milutin Milanković",
+        b: "Jovan Cvijić",
+        c: "Mihailo Petrović Alas",
+        d: "Niko od navedenih",
         correct: "b",
+    },
+    {
+        question: "Erozija je?",
+        a: "Razaranje postojećeg tla",
+        b: "Akumuliranje zemlje",
+        c: "Formiranje kriptodepresije",
+        d: "Ništa od navedenog",
+        correct: "a",
     },
 
 
@@ -95,7 +111,11 @@ submitBtn.addEventListener('click', () => {
            quiz.innerHTML = `
            <h2>You answered ${score}/${quizData.length} questions correctly</h2>
 
+<<<<<<< HEAD
            <button onclick="location.reload()"> Ajmo ponovo :) </button>
+=======
+           <button onclick="location.reload()">Ponovi</button>
+>>>>>>> 2ad924313a4ddd688ed752ccd06727e2898a3c36
            `
         
        }
