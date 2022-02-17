@@ -5,189 +5,43 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <!-- <script src = "js.js"></script> -->
     <title> How much you know geography? </title>
 </head>
-<body onload="startGame()">
+<body>
     
-    <img src = "pocetna.jpeg" width = "100%" height = "100%">
-
-    <div class = "parent">
-        <div id = "text"> Text </div>
-        <div id ="options" class = "buttons">
-            <button class = "btn" id = "btn1">Dugme 1</button>
-            <button class = "btn" id = "btn2">Dugme 2</button>
-            <button class = "btn" id = "btn3">Dugme 3</button>
-            <button class = "btn" id = "btn4">Dugme 4</button>
+    <div class="quiz-container" id="quiz">
+        <div class="quiz-header">
+          <h2 id="question">Question Text</h2>
+          <ul>
+            <li>
+              <input type="radio" name="answer" id="a" class="answer">
+              <label for="a" id="a_text">Answer</label>
+            </li>
+    
+            <li>
+              <input type="radio" name="answer" id="b" class="answer">
+              <label for="b" id="b_text">Answer</label>
+            </li>
+    
+            <li>
+              <input type="radio" name="answer" id="c" class="answer">
+              <label for="c" id="c_text">Answer</label>
+            </li>
+    
+            <li>
+              <input type="radio" name="answer" id="d" class="answer">
+              <label for="d" id="d_text">Answer</label>
+            </li>
+    
+          </ul>
         </div>
-        <div>
-            <button class = "btn" id = "next"> Next </button>
-        </div>
-    </div>
-
-    <script>
-        
-        const text = document.getElementById("text")
-
-    let questions = [
-        {
-            number: 1,
-            question: "Koji je glavni grad Malija?",
-            value: [
-                {answer1: "Bamako", correct1: true},
-                {answer2: "Tripoli", correct2: false},
-                {answer3: "Bagdad", correct3: false},
-                {answer4: "Uagadugu", correct4: false}
-            ]
-        },
-        {
-            number: 2,
-            question: "Koliko kontinenata postoji?",
-            value: [
-                {answer1: "6", correct1: false},
-                {answer2: "8",correct2: false},
-                {answer3: "7", correct3: true},
-                {answer4: "9", correct4: false}
-            ]
-        },
-        {
-            number: 3,
-            question: "Najvisi vrh na svetu je ",
-            value: [
-                {answer1: "Kilimandzaro", correct1: false },
-                {answer2: "Mont Everest", correct2: true },
-                {answer3: "Monblan", correct3: false},
-                {answer4: "Djeravica", correct4: false}
-            ]
-        },
-        {
-            number: 4,
-            question: "Koja je najmnogoljudnija drzava na svetu?",
-            value: [
-                {answer1: "SAD", correct1: false },
-                {answer2: "Kina", correct2: true },
-                {answer3: "Indija", correct3: false},
-                {answer4: "Indonezija", correct4: false}
-            ]
-        },
-        {
-            number: 5,
-            question: "Koja je najduza reka na svetu?",
-            value: [
-                {answer1: "Amazon", correct1: false },
-                {answer2: "Jangcekjang", correct2: false },
-                {answer3: "Misisipi", correct3: false},
-                {answer4: "Nil", correct4: true}
-            ]
-        },
-        {
-            number: 6,
-            question: "Najvisi vrh na svetu je ",
-            value: [
-                {answer1: "Kilimandzaro", correct1: false },
-                {answer2: "Mont Everest", correct2: true },
-                {answer3: "Monblan", correct3: false},
-                {answer4: "Djeravica", correct4: false}
-            ]
-        }
-    ]
-
-    var dugme1 = document.getElementById("btn1")
-    var dugme2 = document.getElementById("btn2")
-    var dugme3 = document.getElementById("btn3")
-    var dugme4 = document.getElementById("btn4")
-    var next = document.getElementById("next")
     
-    function startGame(){
-        let rBr = loadQuestion()
-        showQuestion(rBr)
-    }
+        <button id="submit">Submit</button>
     
-    function proveraOdgovora(provera,clicked){
-        if(provera == 0 && clicked){
-               if(confirm("Kraj igre. Da li zelite ponovo da igrate?") == true){
-                   startGame()
-               }
-               else{
-                location.href = "./pocetna.html";
-               }
-            }else if(provera == 1 && clicked){
-                showQuestion(loadQuestion())
-            }
-    }
+      </div>
 
-    function showQuestion(questionNumber) {
-        
-        var newQuestion = questions.find(newQuestion => newQuestion.number === questionNumber)
-        // Ispis teksta
-        text.innerHTML = newQuestion.question
-        var nizButtons = [
-            dugme1,
-            dugme2,
-            dugme3,
-            dugme4
-        ]
-        for(let k = 0; k < 4; k++){
-            nizButtons[k].style.backgroundColor = "hsl(200, 100%, 50%)"
-        }
-        
-        dugme1.textContent = newQuestion.value[0].answer1
-        dugme2.textContent = newQuestion.value[1].answer2
-        dugme3.textContent = newQuestion.value[2].answer3
-        dugme4.textContent = newQuestion.value[3].answer4
+      <script src = "js/quiz.js"></script>
 
-        let nizAnswer = [
-            newQuestion.value[0].correct1,
-            newQuestion.value[1].correct2,
-            newQuestion.value[2].correct3,
-            newQuestion.value[3].correct4
-        ]
-
-        var provera = 0
-        var clicked = false
-        for(let i = 0; i < 4; i++){
-            if(nizAnswer[i]){
-                nizButtons[i].addEventListener("click", function(){
-                    // text.innerHTML = "Tacan odgovor!"
-                    // nizButtons[i].classList.add("green")
-                    // nizButtons[i].style.backgroundColor = "green"
-                    // provera = 1
-                    // clicked = true
-                    startGame()
-                })
-            }
-            else{
-                nizButtons[i].addEventListener("click", function(){
-                    // text.innerHTML = "Pogresan odgovor!"
-                    // nizButtons[i].classList.add("red")
-                    // nizButtons[i].style.backgroundColor = "red"
-                    // clicked = true
-                    if(confirm("Kraj igre. Da li zelite ponovo da igrate?") == true){
-                   startGame()
-               }
-               else{
-                location.href = "./pocetna.html";
-               }
-                })
-            }
-        }
-        
-        next.addEventListener("click",proveraOdgovora(provera,clicked))
-    }
-
-    
-
-    function loadQuestion(){
-        min = Math.ceil(1);
-        max = Math.floor(4);
-        return Math.floor(Math.random() * (max - min) + min);
-    }
-
-    
-
-    startGame()
-
-    </script>
 
 </body>
 </html>
