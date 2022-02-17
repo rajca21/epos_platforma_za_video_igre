@@ -1,18 +1,10 @@
 const quizData = [
     {
-<<<<<<< HEAD
         question: "Which language runs in a web browser?",
         a: "1996",
         b: "C",
         c: "Python",
         d: "javascript",
-=======
-        question: "Koji je najviši vrh na svetu?",
-        a: "Kilimandžaro",
-        b: "K2",
-        c: "Monblan",
-        d: "Mont Everest",
->>>>>>> 2ad924313a4ddd688ed752ccd06727e2898a3c36
         correct: "d",
     },
     {
@@ -50,8 +42,6 @@ const quizData = [
 
 
 ];
-
-quizData[0].a.src = '../pocetna.jpeg'
 
 const quiz= document.getElementById('quiz')
 const answerEls = document.querySelectorAll('.answer')
@@ -111,11 +101,7 @@ submitBtn.addEventListener('click', () => {
            quiz.innerHTML = `
            <h2>You answered ${score}/${quizData.length} questions correctly</h2>
 
-<<<<<<< HEAD
            <button onclick="location.reload()"> Ajmo ponovo :) </button>
-=======
-           <button onclick="location.reload()">Ponovi</button>
->>>>>>> 2ad924313a4ddd688ed752ccd06727e2898a3c36
            `
         
        }

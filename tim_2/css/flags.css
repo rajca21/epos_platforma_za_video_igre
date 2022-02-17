@@ -1,0 +1,43 @@
+body{
+    background-image: url("../pocetna.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+}
+
+.parent{
+    background-color: #fff;
+    /* background: ; */
+    border-radius: 10px;
+    box-shadow: 0 0 10px 2px rgba(100, 100, 100, 0.1);
+    width: 600px;
+    height: 400px;
+    overflow: hidden;
+    margin: auto;
+    position: absolute;
+    top: 35%;
+    left: 25%;
+    border: 5px solid green;
+    display: grid;
+    grid-template-columns: auto;
+}
+
+#flag{
+    text-align: center;
+}
+
+.quiz-header{
+    text-align: center;
+    background-color: lightgreen;
+}
+
+#submit{
+    background-color: lightblue;
+    height: 30px;
+}
+
+#submit:hover{ 
+    background-color: green;
+    color: white;
+}
