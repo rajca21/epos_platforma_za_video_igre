@@ -1,5 +1,6 @@
 const quizData = [
     {
+
         question: "1. Koji je najviši vrh na svetu?",
         a: "Kilimandžaro",
         b: "K2",
@@ -7,6 +8,7 @@ const quizData = [
         d: "Mont Everest",
         correct: "d",
     },
+
     {
         question: "2. Ko se smatra ocem geografije?",
         a: "Eratosten",
@@ -36,7 +38,7 @@ const quizData = [
         a: "Mogadišu",
         b: "Daka",
         c: "Adis Abeba",
-        d: "Ništa od navedenog",
+        d: "Najrobi",
         correct: "c",
     },
     {
@@ -163,7 +165,9 @@ const quizData = [
 
 
 
+
 ];
+
 
 const quiz= document.getElementById('quiz')
 const answerEls = document.querySelectorAll('.answer')
@@ -220,6 +224,7 @@ submitBtn.addEventListener('click', () => {
        if(currentQuiz < quizData.length) {
            loadQuiz()
        } else {
+
         quiz.innerHTML = `
            <h2>Svaka čast! Odgovorili ste tačno na ${score}/${quizData.length} pitanja!</h2>
 

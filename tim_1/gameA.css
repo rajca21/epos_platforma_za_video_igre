@@ -52,7 +52,8 @@ body {
 #start a,
 #play a,
 #difficulty a,
-#retry a, 
+#retry a,
+#color a,
 #gtmainmenu a {
     border: 3px solid #ffffff;
     color: #ffffff;
@@ -69,6 +70,7 @@ body {
 #GameOver .buttons {
     top: 45%;
 }
+
 p#score {
     top: 20%;
     left: 54.5%;

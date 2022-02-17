@@ -1,69 +1,138 @@
-var pos = 0,
-  test, test_status, question, choice, choices, chA, chB, chC, chD, correct = 0;
+const quizData = [
+  {
+    // 0
+      question: "1. Koja je ovo država?",
+      a: "Burkina Faso",
+      b: "Avganistan",
+      c: "Azerbejdžan",
+      d: "Uzbekistan",
+      correct: "d",
+      img: "./uzbekistan.png"
+  },
+  {
+    // 1
+      question: "2. Koja je ovo država?",
+      a: "Slovačka",
+      b: "Slovenija",
+      c: "Estonija",
+      d: "Letonija",
+      correct: "a",
+      img: "./slovacka.png"
+  },
+  {
+    // 2
+      question: "3. Koja je ovo država?",
+      a: "Kipar",
+      b: "Iran",
+      c: "Malta",
+      d: "Moldavija",
+      correct: "c",
+      img: "./malta.png"
+  },
+  {
+      question: "4. Koja je ovo država?",
+      a: "Gana",
+      b: "Bolivija",
+      c: "Peru",
+      d: "Venecuela",
+      correct: "b",
+      img: "./bolivija.png"
+  },
+  {
+      question: "5. Koja je ovo država?",
+      a: "Bangladeš",
+      b: "Japan",
+      c: "Oman",
+      d: "Jemen",
+      correct: "a",
+      img: "./banglades.png"
+  },
 
-var questions = [{ //1
-    question: "What is Dazai's power from Bungo Stray Dogs?",
-    a: "No Longer Human",
-    b: "For the Tainted Sorrow",
-    c: "Rashomon",
-    d: "Unbreakable",
-    answer: "A",
-    //Add property to hold image source uri, either local or online
-    img: "./pocetna.jpeg"
-  }];
 
-function get(x) {
-  return document.getElementById(x);
-}
+];
 
-function renderQuestion() {
-  test = get("test");
-  if (pos >= questions.length) {
-    test.innerHTML = "<h2>You got " + correct + " of " + questions.length + " questions correct</h2>";
-    get("test_status").innerHTML = "Test completed";
+const quiz= document.getElementById('quiz')
+const answerEls = document.querySelectorAll('.answer')
+const questionEl = document.getElementById('question')
+var a_text = document.getElementById('a_text')
+const b_text = document.getElementById('b_text')
+const c_text = document.getElementById('c_text')
+const d_text = document.getElementById('d_text')
+const submitBtn = document.getElementById('submit')
 
-    pos = 0;
-    correct = 0;
 
-    return false;
-  }
-  get("test_status").innerHTML = "Question " + (pos + 1) + " of " + questions.length;
+let currentQuiz = 0
+let score = 0
 
-  question = questions[pos].question;
-  chA = questions[pos].a;
-  chB = questions[pos].b;
-  chC = questions[pos].c;
-  chD = questions[pos].d;
-  //Add local var to hold uri
-  img = questions[pos].img;
+loadQuiz()
 
-  test.innerHTML = "<h3>" + question + "</h3>";
-  
-  //Add <img> element to DOM with source
-  test.innerHTML += "<img src=\"" + img + "\" width=\"200\" height=\"200\"><br>";
+function loadQuiz() {
 
-  test.innerHTML += "<label> <input type='radio' name='choices' value='A'> " + chA + "</label><be>";
-  test.innerHTML += "<label> <input type='radio' name='choices' value='B'> " + chB + "</label><be>";
-  test.innerHTML += "<label> <input type='radio' name='choices' value='C'> " + chC + "</label><be>";
-  test.innerHTML += "<label> <input type='radio' name='choices' value='D'> " + chD + "</label><br><be>";
-  test.innerHTML += "<button onclick='checkAnswer()'>Submit Answer</button>";
-}
+  deselectAnswers()
 
-function checkAnswer() {
-  choices = document.getElementsByName("choices");
-  for (var i = 0; i < choices.length; i++) {
-    if (choices[i].checked) {
-      choice = choices[i].value;
+  for(let j = 0; j < quizData.length; j++){
+    if(j == currentQuiz){
+      var img = document.createElement("img");
+      img.src = quizData[j].img;
+      var flagg = document.getElementById("flag");
+
+      var e = document.querySelector("#flag");
+      var child = e.lastElementChild;
+      while (child) {
+        e.removeChild(child);
+        child = e.lastElementChild;
+    } 
+
+      img.setAttribute("height", "100");
+      img.setAttribute("width", "100");
+      img.setAttribute("alt", "Flower");
+      flagg.appendChild(img)
     }
   }
 
-  if (choice == questions[pos].answer) {
-    correct++;
-  }
+  const currentQuizData = quizData[currentQuiz]
 
-  pos++;
-
-  renderQuestion();
+  questionEl.innerText = currentQuizData.question
+  a_text.innerText = currentQuizData.a
+  b_text.innerText = currentQuizData.b
+  c_text.innerText = currentQuizData.c
+  d_text.innerText = currentQuizData.d
 }
 
-window.addEventListener("load", renderQuestion);
+function deselectAnswers() {
+  answerEls.forEach(answerEl => answerEl.checked = false)
+}
+
+function getSelected() {
+  let answer
+  answerEls.forEach(answerEl => {
+      if(answerEl.checked) {
+          answer = answerEl.id
+      }
+  })
+  return answer
+}
+
+
+submitBtn.addEventListener('click', () => {
+  const answer = getSelected()
+  if(answer) {
+     if(answer === quizData[currentQuiz].correct) {
+         score++
+     }
+
+     currentQuiz++
+
+     if(currentQuiz < quizData.length) {
+         loadQuiz()
+     } else {
+         quiz.innerHTML = `
+         <h2>Svaka čast! Odgovorili ste tačno na ${score}/${quizData.length} pitanja!</h2>
+
+          <button onclick="location.reload()">Ponovi</button>
+          <button onclick="window.location.href='./pocetna.html'">Završi</button>
+          `
+      
+     }
+  }
+})
