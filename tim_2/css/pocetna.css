@@ -1,3 +1,9 @@
+body{
+    background-image: url("../pocetna.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+}
 .parent{
     background-color: white;
     width: 400px;
@@ -5,8 +11,11 @@
     height: 100px;
     text-align: center;
     position: absolute;
-    top: 42%;
-    left: 35%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
     display: grid;
     grid-template-columns: auto auto;
     column-gap: 150px;
