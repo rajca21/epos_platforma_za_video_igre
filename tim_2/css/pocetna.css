@@ -17,8 +17,8 @@ body{
     right: 0;
     margin: auto;
     display: grid;
-    grid-template-columns: auto auto;
-    column-gap: 150px;
+    grid-template-columns: auto auto auto;
+    column-gap: 100px;
 }
 .btn{
     height: 80px;

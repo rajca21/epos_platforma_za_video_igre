@@ -1,7 +1,7 @@
 const quizData = [
     {
         question: "Which language runs in a web browser?",
-        a: "Java",
+        a: "1996",
         b: "C",
         c: "Python",
         d: "javascript",
@@ -35,10 +35,12 @@ const quizData = [
 
 ];
 
+quizData[0].a.src = '../pocetna.jpeg'
+
 const quiz= document.getElementById('quiz')
 const answerEls = document.querySelectorAll('.answer')
 const questionEl = document.getElementById('question')
-const a_text = document.getElementById('a_text')
+var a_text = document.getElementById('a_text')
 const b_text = document.getElementById('b_text')
 const c_text = document.getElementById('c_text')
 const d_text = document.getElementById('d_text')
@@ -93,8 +95,9 @@ submitBtn.addEventListener('click', () => {
            quiz.innerHTML = `
            <h2>You answered ${score}/${quizData.length} questions correctly</h2>
 
-           <button onclick="location.reload()">Reload</button>
+           <button onclick="location.reload()"> Ajmo ponovo :) </button>
            `
+        
        }
     }
 })
