@@ -32,6 +32,7 @@ ASTEROID_MEDIUM_SCORE = 25//broj poena za srednji asteroid
 ASTEROID_SMALL_SCORE = 50//broj poena za mali asteroid
 const SAVE_KEY_SCORE = "highscore" // cuvanje highscore-a
 
+let color = "white";
 
 var level, asteroids, ship, score, highscore;
 newGame();
@@ -254,7 +255,7 @@ function update() {
         if (help==1 && !ship.ripship){
             if(!destroying){
         // crtanje broda
-        ctx.strokeStyle = "white";
+        ctx.strokeStyle = color;
         ctx.lineWidth = SHIP_SIZE / 20;
         ctx.beginPath();
         ctx.moveTo( // vrh broda
@@ -494,6 +495,22 @@ function customMenu(){
     menu.style.display = "none";
     customizeMenu.style.display = "block";
 }
+function blueColor(){
+    color = "blue";
+    mainMenu();
+}
+function redColor(){
+    color = "red";
+    mainMenu();
+}
+function yellowColor(){
+    color = "yellow";
+    mainMenu();
+}
+function orangeColor(){
+    color = "orange";
+    mainMenu();
+}
 
 
 function gameOver(){
@@ -510,7 +527,7 @@ function endMenu(){
 
 function mainMenu(){
     let testman = document.getElementById("GameOver");
-    let menu =document.getElementById("menu");
+    let menu = document.getElementById("menu");
     let custommen = document.getElementById("CustomizeMenu");
     custommen.style.display = "none";
     testman.style.display = "none";
