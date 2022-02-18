@@ -84,7 +84,7 @@ function loadQuiz() {
     } 
 
       img.setAttribute("height", "100");
-      img.setAttribute("width", "100");
+      img.setAttribute("width", "auto");
       img.setAttribute("alt", "Flower");
       flagg.appendChild(img)
     }
