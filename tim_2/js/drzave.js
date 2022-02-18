@@ -1,7 +1,7 @@
 const quizData = [
   {
     // 0
-      question: "1. Koja je ovo država?",
+      question: "Koja je ovo država?",
       a: "Burkina Faso",
       b: "Avganistan",
       c: "Azerbejdžan",
@@ -11,7 +11,7 @@ const quizData = [
   },
   {
     // 1
-      question: "2. Koja je ovo država?",
+      question: "Koja je ovo država?",
       a: "Slovačka",
       b: "Slovenija",
       c: "Estonija",
@@ -21,7 +21,7 @@ const quizData = [
   },
   {
     // 2
-      question: "3. Koja je ovo država?",
+      question: "Koja je ovo država?",
       a: "Kipar",
       b: "Iran",
       c: "Malta",
@@ -30,7 +30,7 @@ const quizData = [
       img: "./malta.png"
   },
   {
-      question: "4. Koja je ovo država?",
+      question: "Koja je ovo država?",
       a: "Gana",
       b: "Bolivija",
       c: "Peru",
@@ -39,7 +39,7 @@ const quizData = [
       img: "./bolivija.png"
   },
   {
-      question: "5. Koja je ovo država?",
+      question: "Koja je ovo država?",
       a: "Bangladeš",
       b: "Japan",
       c: "Oman",
@@ -61,17 +61,73 @@ const d_text = document.getElementById('d_text')
 const submitBtn = document.getElementById('submit')
 
 
+function loadQuestion(){
+  min = Math.ceil(1);
+  max = Math.floor(5);
+  return Math.floor(Math.random() * (max - min) + min);
+}
+
 let currentQuiz = 0
 let score = 0
-
+let nasao = 0
+let uradio = 0
+let que
+let korisceni = [
+  0,
+  1,
+  2,
+  3,
+  4
+]
+let trenutni = 5
 loadQuiz()
 
 function loadQuiz() {
+  let minusi = 0
+  for(let f = 0; f < trenutni; f++){
+    if(-1 == korisceni[f])
+    minusi++
+  }
+
+  que = loadQuestion() - 1
+  if(minusi == 4){
+  for(let f = 0; f < trenutni; f++){
+    if(-1 != korisceni[f])
+    que = korisceni[f]
+  }
+}
+  // if(trenutni != 0){
+  //   for(let t = 0; t < trenutni; t++){
+  //     if(que == korisceni[t]){
+  //       loadQuiz()
+  //     }
+  //   }
+  //   korisceni[trenutni] = que
+  //   trenutni++
+  // }
+  // else{
+  //   korisceni[trenutni] = que
+  //   trenutni++
+  // }
+  // while()
+  for(let t = 0; t < trenutni; t++){
+    if(que == korisceni[t]){
+     korisceni[t] = -1
+     nasao++
+    }
+  }
+  if(nasao == 0){
+    loadQuiz()
+    return
+  }
+  console.log(que)
+  nasao = 0
+  uradio++
 
   deselectAnswers()
 
   for(let j = 0; j < quizData.length; j++){
-    if(j == currentQuiz){
+    if(j == que){
       var img = document.createElement("img");
       img.src = quizData[j].img;
       var flagg = document.getElementById("flag");
@@ -90,7 +146,7 @@ function loadQuiz() {
     }
   }
 
-  const currentQuizData = quizData[currentQuiz]
+  const currentQuizData = quizData[que]
 
   questionEl.innerText = currentQuizData.question
   a_text.innerText = currentQuizData.a
@@ -117,21 +173,24 @@ function getSelected() {
 submitBtn.addEventListener('click', () => {
   const answer = getSelected()
   if(answer) {
-     if(answer === quizData[currentQuiz].correct) {
+     if(answer === quizData[que].correct) {
          score++
      }
 
-     currentQuiz++
+    //  currentQuiz++
 
-     if(currentQuiz < quizData.length) {
+     if(uradio < quizData.length) {
          loadQuiz()
      } else {
+      nasao = 0
+      uradio = 0
          quiz.innerHTML = `
          <h2>Svaka čast! Odgovorili ste tačno na ${score}/${quizData.length} pitanja!</h2>
 
           <button onclick="location.reload()">Ponovi</button>
           <button onclick="window.location.href='./pocetna.html'">Završi</button>
           `
+          score = 0
       
      }
   }
