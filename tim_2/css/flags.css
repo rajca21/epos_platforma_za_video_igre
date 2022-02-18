@@ -32,6 +32,8 @@ body{
 
 #flag{
     text-align: center;
+    height: 100px;
+    width: auto;
 }
 
 .quiz-header{
@@ -42,7 +44,8 @@ body{
 #submit{
     background-color: #03cae4;
     height: 30px;
-    
+    padding: 0;
+    margin-bottom: 0;
 }
 
 #submit:hover{ 
