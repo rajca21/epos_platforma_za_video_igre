@@ -22,6 +22,38 @@ body {
     
     margin-left: -100px;
 }
+.slidecontainer {
+    width: 30%;
+  }
+  
+  .slider {
+    -webkit-appearance: none;
+    width: 420px;
+    height: 25px;
+    background: #ffffff;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    position: fixed;
+    top:30%;
+    left:39%;
+  }
+  
+  .slider:hover {
+    opacity: 1;
+  }
+  
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: rgb(49, 21, 175);
+    cursor: pointer;
+  }
+  
+
 
 .buttons{
     font-family: cv;
@@ -49,11 +81,13 @@ body {
     margin-top: 22px !important;
 }
 
+
 #start a,
 #play a,
 #difficulty a,
 #retry a,
 #color a,
+#confirm a,
 #gtmainmenu a {
     border: 3px solid #ffffff;
     color: #ffffff;
@@ -81,3 +115,4 @@ p#score {
 #difficulty a:hover,
 #retry a:hover,
 #gtmainmenu a:hover { background-color: #ffffff; color: #1bafdb; }
+

@@ -16,7 +16,7 @@
                 <a href="#" onclick="startGame()">Play</a>
             </div>
             <div id="difficulty" class="btn2" style="display:block">
-                <a href="#" onclick="startGame()">Difficulty</a>
+                <a href="#" onclick="difficultyMenu()">Difficulty</a>
             </div>
             <div id="start" class="btn3" style="display:block">
                 <a href="#" onclick="customMenu()">Customize</a>
@@ -57,8 +57,17 @@
                     </div>
                 </div>
         </div>
-
-
+        <div id="DifMenu" style="display:none">
+            <div class="title"><p class="go">Difficulty</p></div>
+            <div class="slidecontainer">
+                <input type="range" class="slider" id="myRange" min="1" max="10" value="5">
+            </div>
+            <div class="buttons">
+            <div id="confirm" class="btn2" style="display:block">
+                <a href="#" onclick="mainMenu()">Confirm</a>
+            </div>
+            </div>
+        </div>
    <script src="gameA.js"></script>
 </body>
 </html>

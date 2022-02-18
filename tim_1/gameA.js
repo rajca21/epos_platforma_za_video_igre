@@ -256,6 +256,7 @@ function update() {
             if(!destroying){
         // crtanje broda
         ctx.strokeStyle = color;
+        ctx.fillStyle = color;
         ctx.lineWidth = SHIP_SIZE / 20;
         ctx.beginPath();
         ctx.moveTo( // vrh broda
@@ -270,6 +271,7 @@ function update() {
             ship.x - ship.r * (2 / 3 * Math.cos(ship.a) - Math.sin(ship.a)),
             ship.y + ship.r * (2 / 3 * Math.sin(ship.a) + Math.cos(ship.a))
         );
+        ctx.fill();
         ctx.closePath();
         ctx.stroke();
         }else{
@@ -495,6 +497,12 @@ function customMenu(){
     menu.style.display = "none";
     customizeMenu.style.display = "block";
 }
+function difficultyMenu(){
+    let difMenu = document.getElementById("DifMenu");
+    let menu =document.getElementById("menu");
+    menu.style.display = "none";
+    difMenu.style.display = "block";
+}
 function blueColor(){
     color = "blue";
     mainMenu();
@@ -529,6 +537,8 @@ function mainMenu(){
     let testman = document.getElementById("GameOver");
     let menu = document.getElementById("menu");
     let custommen = document.getElementById("CustomizeMenu");
+    let difmen = document.getElementById("DifMenu");
+    difmen.style.display = "none";
     custommen.style.display = "none";
     testman.style.display = "none";
     menu.style.display = "block";
