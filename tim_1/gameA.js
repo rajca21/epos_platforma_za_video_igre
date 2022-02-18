@@ -256,7 +256,6 @@ function update() {
             if(!destroying){
         // crtanje broda
         ctx.strokeStyle = color;
-        ctx.fillStyle = color;
         ctx.lineWidth = SHIP_SIZE / 20;
         ctx.beginPath();
         ctx.moveTo( // vrh broda
@@ -271,7 +270,6 @@ function update() {
             ship.x - ship.r * (2 / 3 * Math.cos(ship.a) - Math.sin(ship.a)),
             ship.y + ship.r * (2 / 3 * Math.sin(ship.a) + Math.cos(ship.a))
         );
-        ctx.fill();
         ctx.closePath();
         ctx.stroke();
         }else{
