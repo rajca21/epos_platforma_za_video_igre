@@ -2,7 +2,7 @@ body{
     background-image: url("../pocetna.jpeg");
     background-size: cover;
     background-repeat: no-repeat;
-    height: 100%;
+    height: 100vh;
     font-family: 'Poppins', sans-serif;
     /* Dodao sam malo css kao na kviz.css */
     display: flex;
