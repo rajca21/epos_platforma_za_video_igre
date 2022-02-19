@@ -7,11 +7,13 @@ canvas.setAttribute("height", SCREEN_HEIGHT);
 document.body.appendChild(canvas);
 const ctx = canvas.getContext("2d");
 
+var z=0;
+var difficultyStep = 5;
 const FPS = 30; // frejmovi po sekundi
 const ASTEROID_EDGE = 0.4; // oblik asteroida (0 = none, 1 = lots)
-const ASTEROID_NUM = 3; // pocetni broj asteroida
+var ASTEROID_NUM = 3; // pocetni broj asteroida
 const ASTEROID_SIZE = 100; // pocetna velicina asteroida 
-const ASTEROID_SPEED = 100; // maximalna brzina asteroida u pixelima u sekundi
+var ASTEROID_SPEED = 100; // maximalna brzina asteroida u pixelima u sekundi
 const ASTEROID_VERT = 10; // srednja vrednost koliko ce asteroid da ima stranica
 const FRICTION = 0.7; // trenje (0 = bez trenja, 1 = mnogo trenja)
 const SHIP_SIZE = 30; // visina broda u pixelima
@@ -159,17 +161,27 @@ function destroyAsteroid(index) {
     if (r == Math.ceil(ASTEROID_SIZE / 2)) { // veliki asteroid
         asteroids.push(newAsteroid(x, y, Math.ceil(ASTEROID_SIZE / 4)));
         asteroids.push(newAsteroid(x, y, Math.ceil(ASTEROID_SIZE / 4)));
-        score += ASTEROID_LARGE_SCORE;
+        score += ASTEROID_LARGE_SCORE * difficultyStep ;
     } else if (r == Math.ceil(ASTEROID_SIZE / 4)) { // srednji asteroid
         asteroids.push(newAsteroid(x, y, Math.ceil(ASTEROID_SIZE / 8)));
         asteroids.push(newAsteroid(x, y, Math.ceil(ASTEROID_SIZE / 8)));
-        score += ASTEROID_MEDIUM_SCORE;
+        score += ASTEROID_MEDIUM_SCORE * difficultyStep;
     } else{
-        score += ASTEROID_SMALL_SCORE;
-    }
-
+        score += ASTEROID_SMALL_SCORE* difficultyStep;
+        z=z+1;
+         if (z==4){
+            do{
+                x = Math.floor(Math.random() * canvas.width);
+                y = Math.floor(Math.random() * canvas.height);
+                asteroids.push(newAsteroid(x,y, Math.ceil(ASTEROID_SIZE / 2)));
+            } while (distBetweenPoints(ship.x, ship.y, x, y) < ASTEROID_SIZE * 2 + ship.r);
+            asteroids.push(newAsteroid(x, y, Math.ceil(ASTEROID_SIZE / 2)));
+            z=0;
+            }  
+         }
     // unistavanje asteroida
     asteroids.splice(index, 1);
+    
     }
 
     // provera dal je skor veci od highscore
@@ -486,7 +498,7 @@ function update() {
     ctx.textBaseline = "middle";
     ctx.fillStyle = "white";
     ctx.font = (ASTEROID_SMALL_SCORE * 0.75) + "px dejavu sans mono";//koristio sam vec stavljenu velicinu za mali asteroid kao velicina fonta
-    ctx.fillText("HIGH: " + highscore, (canvas.width / 2) - 2 * SHIP_SIZE, SHIP_SIZE);
+    ctx.fillText("HIGH: " + highscore, (canvas.width / 2) - 2 * (SHIP_SIZE + 10), SHIP_SIZE);
 }
 
 function customMenu(){
@@ -550,4 +562,12 @@ function startGame() {
     help = 1;
     ship.ripship=false;
     newGame();    
+}
+
+function difficultyConfirm(){
+    var j = document.getElementById("myRange").value
+    difficultyStep = j
+    ASTEROID_NUM = 1.5*j;
+    ASTEROID_SPEED = 100 * (j/7);
+    mainMenu();
 }
