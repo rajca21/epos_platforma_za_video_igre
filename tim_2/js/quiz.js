@@ -1,7 +1,7 @@
 const quizData = [
     {
 
-        question: "1. Koji je najviši vrh na svetu?",
+        question: "Koji je najviši vrh na svetu?",
         a: "Kilimandžaro",
         b: "K2",
         c: "Monblan",
@@ -10,7 +10,7 @@ const quizData = [
     },
 
     {
-        question: "2. Ko se smatra ocem geografije?",
+        question: "Ko se smatra ocem geografije?",
         a: "Eratosten",
         b: "Arhimed",
         c: "Epikur",
@@ -18,7 +18,7 @@ const quizData = [
         correct: "a",
     },
     {
-        question: "3. Koji je glavni grad Letonije?",
+        question: "Koji je glavni grad Letonije?",
         a: "Viljnus",
         b: "Talin",
         c: "Riga",
@@ -26,7 +26,7 @@ const quizData = [
         correct: "c",
     },
     {
-        question: "4. Ko je naš najpoznatiji geograf?",
+        question: "Ko je naš najpoznatiji geograf?",
         a: "Milutin Milanković",
         b: "Jovan Cvijić",
         c: "Mihailo Petrović Alas",
@@ -34,7 +34,7 @@ const quizData = [
         correct: "b",
     },
     {
-        question: "5. Koji je glavni grad Etiopije?",
+        question: "Koji je glavni grad Etiopije?",
         a: "Mogadišu",
         b: "Daka",
         c: "Adis Abeba",
@@ -42,7 +42,7 @@ const quizData = [
         correct: "c",
     },
     {
-        question: "6. Erozija je?",
+        question: "Erozija je?",
         a: "Razaranje postojećeg tla",
         b: "Akumuliranje zemlje",
         c: "Formiranje kriptodepresije",
@@ -50,7 +50,7 @@ const quizData = [
         correct: "a",
     },
     {
-        question: "7. Koja je reka od ponuđenih bifurkacija?",
+        question: "Koja je reka od ponuđenih bifurkacija?",
         a: "Pek",
         b: "Sava",
         c: "Topčiderka",
@@ -58,7 +58,7 @@ const quizData = [
         correct: "d",
     },
     {
-        question: "8. Koji je glavni grad Moldavije?",
+        question: "Koji je glavni grad Moldavije?",
         a: "Minsk",
         b: "Kišinjev",
         c: "Tbilisi",
@@ -66,7 +66,7 @@ const quizData = [
         correct: "b",
     },
     {
-        question: "9. Koja je zvanična valuta u Japanu?",
+        question: "Koja je zvanična valuta u Japanu?",
         a: "Japanski jen",
         b: "Japanski juan",
         c: "Japanski dolar",
@@ -74,7 +74,7 @@ const quizData = [
         correct: "a",
     },
     {
-        question: "10. Kako se zvao socijalni sistem koji je bio zastupljen u JAR tokom XX veka?",
+        question: "Kako se zvao socijalni sistem koji je bio zastupljen u JAR tokom XX veka?",
         a: "Apartrejs",
         b: "Apartman",
         c: "Aparthejd",
@@ -82,7 +82,7 @@ const quizData = [
         correct: "c",
     },
     {
-        question: "11. Koja je treća najmnogoljudnija zemlja an svetu?",
+        question: "Koja je treća najmnogoljudnija zemlja an svetu?",
         a: "Kina",
         b: "Brazil",
         c: "Indija",
@@ -90,7 +90,7 @@ const quizData = [
         correct: "d",
     },
     {
-        question: "12. Na kom kontinentu se nalazi pustinja Atakama?",
+        question: "Na kom kontinentu se nalazi pustinja Atakama?",
         a: "Južna Amerika",
         b: "Afrika",
         c: "Severna Amerika",
@@ -98,7 +98,7 @@ const quizData = [
         correct: "a",
     },
     {
-        question: "13. U kojoj zemlji se nalazi planina Leotar?",
+        question: "U kojoj zemlji se nalazi planina Leotar?",
         a: "Srbija",
         b: "Slovenija",
         c: "Bosna i Hercegovina",
@@ -106,7 +106,7 @@ const quizData = [
         correct: "c",
     },
     {
-        question: "14. Koji je glavni grad Perua?",
+        question: "Koji je glavni grad Perua?",
         a: "Lima",
         b: "LaPaz",
         c: "Santijago",
@@ -114,7 +114,7 @@ const quizData = [
         correct: "a",
     },
     {
-        question: "15. Kako se zove vrh Golije?",
+        question: "Kako se zove vrh Golije?",
         a: "Tornik",
         b: "Mačkov Kamen",
         c: "Jankov Kamen",
@@ -122,7 +122,7 @@ const quizData = [
         correct: "c",
     },
     {
-        question: "16. Koliko kilometara približno iznosi obim Ekvatora?",
+        question: "Koliko kilometara približno iznosi obim Ekvatora?",
         a: "~120 000",
         b: "~40 000",
         c: "~70 000",
@@ -130,7 +130,7 @@ const quizData = [
         correct: "b",
     },
     {
-        question: "17. Koji je najveći kontinent?",
+        question: "Koji je najveći kontinent?",
         a: "Evropa",
         b: "Afrika",
         c: "Azija",
@@ -138,7 +138,7 @@ const quizData = [
         correct: "c",
     },
     {
-        question: "18. Koji je glavni grad Jordana?",
+        question: "Koji je glavni grad Jordana?",
         a: "Baku",
         b: "Rijad",
         c: "Islamabad",
@@ -146,7 +146,7 @@ const quizData = [
         correct: "d",
     },
     {
-        question: "19. Koje ostrvo ima najveću površinu na svetu?",
+        question: "Koje ostrvo ima najveću površinu na svetu?",
         a: "Borneo",
         b: "Grenland",
         c: "Madagaskar",
@@ -154,7 +154,7 @@ const quizData = [
         correct: "b",
     },
     {
-        question: "20. Koja je minimalna visina da bi uzvišenje bilo planina?",
+        question: "Koja je minimalna visina da bi uzvišenje bilo planina?",
         a: "1000m",
         b: "700m",
         c: "500m",
@@ -178,15 +178,54 @@ const submitBtn = document.getElementById('submit')
 let currentQuiz = 0
 let score = 0
 
+let nasao = 0
+let uradio = 0
+let que
+let korisceni = [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,10,11,12,13,14,15,16,17,18,19
+]
+let trenutni = 20
+
 loadQuiz()
+
+function loadQuestion(){
+    min = Math.ceil(1);
+    max = Math.floor(20);
+    return Math.round(Math.random() * (max - min) + min);
+}
 
 function loadQuiz() {
 
+    que = loadQuestion() - 1
+  
+    for(let t = 0; t < trenutni; t++){
+      if(que == korisceni[t]){
+       korisceni[t] = -1
+       nasao++
+      }
+    }
+    if(nasao == 0){
+      loadQuiz()
+      return
+    }
+
+    nasao = 0
+    uradio++
+
     deselectAnswers()
 
-    const currentQuizData = quizData[currentQuiz]
+    const currentQuizData = quizData[que]
 
-    questionEl.innerText = currentQuizData.question
+    questionEl.innerText = uradio + ". " + currentQuizData.question
     a_text.innerText = currentQuizData.a
     b_text.innerText = currentQuizData.b
     c_text.innerText = currentQuizData.c
