@@ -65,6 +65,33 @@ const quizData = [
       correct: "b",
       img: "./andora.png"
   },
+  {
+    question: "Koja je ovo država?",
+      a: "Belorusija",
+      b: "Srbija",
+      c: "Rusija",
+      d: "Francuska",
+      correct: "c",
+      img: "./rusija.png"
+  },
+  {
+    question: "Koja je ovo država?",
+      a: "Indonezija",
+      b: "Poljska",
+      c: "Monako",
+      d: "Malta",
+      correct: "a",
+      img: "./indonezija.png"
+  },
+  {
+    question: "Koja je ovo država?",
+      a: "Belgija",
+      b: "Rumunija",
+      c: "Andora",
+      d: "Kipar",
+      correct: "a",
+      img: "./belgija.jpg"
+  },
 ];
 
 const quiz= document.getElementById('quiz')
@@ -79,8 +106,8 @@ const submitBtn = document.getElementById('submit')
 
 function loadQuestion(){
   min = Math.ceil(1);
-  max = Math.floor(6);
-  return Math.floor(Math.random() * (max - min) + min);
+  max = Math.floor(10);
+  return Math.round(Math.random() * (max - min) + min);
 }
 
 let currentQuiz = 0
@@ -95,45 +122,18 @@ let korisceni = [
   3,
   4,
   5,
-  6
+  6,
+  7,
+  8,
+  9
 ]
-let trenutni = 7
+let trenutni = 10
 loadQuiz()
 
 function loadQuiz() {
-  let minusi = 0
-  for(let f = 0; f < trenutni; f++){
-    if(-1 == korisceni[f])
-    minusi++
-  }
 
   que = loadQuestion() - 1
-  if(minusi == 4){
-  for(let f = 0; f < trenutni; f++){
-    if(-1 != korisceni[f])
-    que = korisceni[f]
-    }
-  }
-  if(minusi == 5){
-    for(let f = 0; f < trenutni; f++){
-      if(-1 != korisceni[f])
-      que = korisceni[f]
-      }
-    }
-  // if(trenutni != 0){
-  //   for(let t = 0; t < trenutni; t++){
-  //     if(que == korisceni[t]){
-  //       loadQuiz()
-  //     }
-  //   }
-  //   korisceni[trenutni] = que
-  //   trenutni++
-  // }
-  // else{
-  //   korisceni[trenutni] = que
-  //   trenutni++
-  // }
-  // while()
+  
   for(let t = 0; t < trenutni; t++){
     if(que == korisceni[t]){
      korisceni[t] = -1
@@ -144,6 +144,20 @@ function loadQuiz() {
     loadQuiz()
     return
   }
+
+  // let minusi = 0
+  // for(let f = 0; f < trenutni; f++){
+  //   if(-1 == korisceni[f])
+  //   minusi++
+  // }
+
+    // if(minusi == 7){
+    //   for(let f = 0; f < trenutni; f++){
+    //     if(-1 != korisceni[f])
+    //     que = korisceni[f]
+    //     }
+    //   }
+  
   console.log(que)
   nasao = 0
   uradio++

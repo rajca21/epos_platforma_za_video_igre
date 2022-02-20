@@ -161,10 +161,6 @@ const quizData = [
         d: "250m",
         correct: "c",
     },
-    
-
-
-
 
 ];
 
