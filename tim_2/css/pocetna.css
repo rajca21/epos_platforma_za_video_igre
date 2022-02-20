@@ -2,7 +2,7 @@ body{
     background-image: url("../pocetna.jpeg");
     background-size: cover;
     background-repeat: no-repeat;
-    height: 100%;
+    height: 100vh;
 }
 
 .parent{
@@ -19,7 +19,7 @@ body{
     margin: auto;
     display: grid;
     grid-template-columns: auto auto auto;
-    column-gap: 100px;
+    column-gap: 60px;
 }
 .btn{
     margin-top: 65%;
@@ -34,5 +34,29 @@ body{
 .btn:hover{ 
     background-color: green;
     color: white;
+}
+
+@media screen and (max-width: 400px) {
+    .parent{
+        top: 20%;
+    }
+}
+@media screen and (min-width: 401px) and (max-width: 800px) {
+    .parent{
+        top: -10%;
+        left: 15%;
+    }
+}
+@media screen and (min-width: 801px) and (max-width: 1100px) {
+    .parent{
+        top: -10%;
+        left: 20%;
+    }
+}
+@media screen and (min-width: 1101px) {
+    .parent{
+        top: -15%;
+        left: 5%;
+    }
 }
 

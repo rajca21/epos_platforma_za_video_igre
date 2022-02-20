@@ -47,8 +47,24 @@ const quizData = [
       correct: "a",
       img: "./banglades.png"
   },
-
-
+  {
+    question: "Koja je ovo država?",
+      a: "Finska",
+      b: "Norveška",
+      c: "Španija",
+      d: "Island",
+      correct: "d",
+      img: "./island.png"
+  },
+  {
+    question: "Koja je ovo država?",
+      a: "Rumunija",
+      b: "Andora",
+      c: "Bugarska",
+      d: "Monako",
+      correct: "b",
+      img: "./andora.png"
+  },
 ];
 
 const quiz= document.getElementById('quiz')
@@ -63,7 +79,7 @@ const submitBtn = document.getElementById('submit')
 
 function loadQuestion(){
   min = Math.ceil(1);
-  max = Math.floor(5);
+  max = Math.floor(6);
   return Math.floor(Math.random() * (max - min) + min);
 }
 
@@ -77,9 +93,11 @@ let korisceni = [
   1,
   2,
   3,
-  4
+  4,
+  5,
+  6
 ]
-let trenutni = 5
+let trenutni = 7
 loadQuiz()
 
 function loadQuiz() {
@@ -94,8 +112,14 @@ function loadQuiz() {
   for(let f = 0; f < trenutni; f++){
     if(-1 != korisceni[f])
     que = korisceni[f]
+    }
   }
-}
+  if(minusi == 5){
+    for(let f = 0; f < trenutni; f++){
+      if(-1 != korisceni[f])
+      que = korisceni[f]
+      }
+    }
   // if(trenutni != 0){
   //   for(let t = 0; t < trenutni; t++){
   //     if(que == korisceni[t]){
@@ -186,7 +210,7 @@ submitBtn.addEventListener('click', () => {
       uradio = 0
          quiz.innerHTML = `
          <h2>Svaka čast! Odgovorili ste tačno na ${score}/${quizData.length} pitanja!</h2>
-
+    
           <button onclick="location.reload()">Ponovi</button>
           <button onclick="window.location.href='./pocetna.html'">Završi</button>
           `
