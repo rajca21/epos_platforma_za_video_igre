@@ -7,7 +7,7 @@ const quizData = [
       c: "Azerbejdžan",
       d: "Uzbekistan",
       correct: "d",
-      img: "./uzbekistan.png"
+      img: "./img/uzbekistan.png"
   },
   {
     // 1
@@ -17,7 +17,7 @@ const quizData = [
       c: "Estonija",
       d: "Letonija",
       correct: "a",
-      img: "./slovacka.png"
+      img: "./img/slovacka.png"
   },
   {
     // 2
@@ -27,7 +27,7 @@ const quizData = [
       c: "Malta",
       d: "Moldavija",
       correct: "c",
-      img: "./malta.png"
+      img: "./img/malta.png"
   },
   {
       question: "Koja je ovo država?",
@@ -36,7 +36,7 @@ const quizData = [
       c: "Peru",
       d: "Venecuela",
       correct: "b",
-      img: "./bolivija.png"
+      img: "./img/bolivija.png"
   },
   {
       question: "Koja je ovo država?",
@@ -45,7 +45,7 @@ const quizData = [
       c: "Oman",
       d: "Jemen",
       correct: "a",
-      img: "./banglades.png"
+      img: "./img/banglades.png"
   },
   {
     question: "Koja je ovo država?",
@@ -54,7 +54,7 @@ const quizData = [
       c: "Španija",
       d: "Island",
       correct: "d",
-      img: "./island.png"
+      img: "./img/island.png"
   },
   {
     question: "Koja je ovo država?",
@@ -63,7 +63,7 @@ const quizData = [
       c: "Bugarska",
       d: "Monako",
       correct: "b",
-      img: "./andora.png"
+      img: "./img/andora.png"
   },
   {
     question: "Koja je ovo država?",
@@ -72,7 +72,7 @@ const quizData = [
       c: "Rusija",
       d: "Francuska",
       correct: "c",
-      img: "./rusija.png"
+      img: "./img/rusija.png"
   },
   {
     question: "Koja je ovo država?",
@@ -81,7 +81,7 @@ const quizData = [
       c: "Monako",
       d: "Malta",
       correct: "a",
-      img: "./indonezija.png"
+      img: "./img/indonezija.png"
   },
   {
     question: "Koja je ovo država?",
@@ -90,7 +90,7 @@ const quizData = [
       c: "Andora",
       d: "Kipar",
       correct: "a",
-      img: "./belgija.jpg"
+      img: "./img/belgija.jpg"
   },
 ];
 
